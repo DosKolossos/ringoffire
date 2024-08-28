@@ -7,11 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { log } from 'node:console';
+import { GameInfoComponent } from '../game-info/game-info.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule, PlayerComponent, MatIconModule, MatButtonModule, DialogAddPlayerComponent],
+  imports: [CommonModule, PlayerComponent, MatIconModule, MatButtonModule, DialogAddPlayerComponent, GameInfoComponent],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
@@ -21,7 +23,7 @@ export class GameComponent {
   currentCard: string | undefined = '';
   game = new Game;
 
-constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.newGame();
@@ -33,6 +35,8 @@ constructor(public dialog: MatDialog){}
   }
 
   takeCard() {
+    console.log('takeCard wird getriggert');
+
     if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop() || '';
       this.pickCardAnimation = true;
@@ -49,8 +53,8 @@ constructor(public dialog: MatDialog){}
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-
+    dialogRef.afterClosed().subscribe(name => {
+      this.game.players.push(name);
     });
   }
 }

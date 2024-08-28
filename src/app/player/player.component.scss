@@ -1,19 +1,25 @@
-.player{
+.player {
     width: 300px;
     display: flex;
     align-items: center;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
-    span{
+    color: rgb(0, 0, 0, 0.5);
+    span {
         font-size: 32px;
         margin-left: 16px;
     }
 
-    background-color: orange;
+    background-color: rgb(206, 206, 206, 0.8);
+
     img {
-        height: 100px;
-        width: 100px;
+        height: 70px;
+        width: 70px;
         object-fit: cover;
         border-radius: 100%;
     }
+}
+
+.player-active {
+    background-color: orange;
 }
