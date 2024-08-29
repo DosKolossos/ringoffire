@@ -36,14 +36,15 @@ export class GameComponent {
 
   takeCard() {
     console.log('takeCard wird getriggert');
-
     if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop() || '';
       this.pickCardAnimation = true;
-
+      this.game.currentPlayer++;
+      this.game.currentPlayer=this.game.currentPlayer % this.game.players.length;
       setTimeout(() => {
         if (this.currentCard !== undefined) {
           this.game.playedCard.push(this.currentCard);
+          console.log('CurrentCard: ', this.currentCard);
         }
         this.pickCardAnimation = false;
       }, 1000);
